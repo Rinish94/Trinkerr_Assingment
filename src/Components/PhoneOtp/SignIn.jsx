@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import firebase from "firebase/app";
 import "firebase/auth";
+import "./SignIn.css";
 //components
 // import SignIn from "./Components/PhoneOtp/SignIn";
 // import Home from "./Components/PhoneOtp/Home";
@@ -111,13 +112,14 @@ const SignIn = () => {
   // console.log(login)
   return (
     <div className="wrapper">
-      <h1 className="main-heading">Sign in</h1>
-      <p className="sub-text">Sign in using your mobile number.</p>
+      <h1>Sign in</h1>
+      <p>Sign in using your mobile number.</p>
       {!viewOtpForm ? (
         <div className="form-wrapper">
           <form id="loginForm" onSubmit={loginSubmit}>
             <div className="input-field">
               <label>User Name</label>
+              <br/>
               <input
                 type="text"
                 placeholder="name"
@@ -127,6 +129,7 @@ const SignIn = () => {
             </div>
             <div className="input-field">
               <label>Phone Number</label>
+              <br/>
               <input
                 type="text"
                 placeholder="Phone"
@@ -134,6 +137,7 @@ const SignIn = () => {
                 autoComplete="false"
               />
             </div>
+            <p></p>
             <button className="main-button" type="submit" id="sign-in-button">
               Sign in
             </button>
