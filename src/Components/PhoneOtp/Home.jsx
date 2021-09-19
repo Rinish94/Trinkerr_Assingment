@@ -2,28 +2,32 @@ import React, { useEffect, useState } from "react";
 import firebase from "firebase/app";
 import "firebase/auth";
 import { useHistory } from "react-router";
-
+import one from "../../ImageFolder/oneIcon.png";
+import two from "../../ImageFolder/twoIcon.png";
+import three from "../../ImageFolder/threeIcon.png";
+import four from "../../ImageFolder/fourIcon.png";
+import five from "../../ImageFolder/fiveIcon.png";
 import "./Home.css";
 const imagesPool = [
   {
     name: "First",
-    src: "http://getdrawings.com/free-icon-bw/one-icon-4.png",
+    src: one,
   },
   {
     name: "Second",
-    src: "http://getdrawings.com/free-icon-bw/free-shirt-icon-9.png",
+    src: two,
   },
   {
     name: "Third",
-    src: "http://getdrawings.com/free-icon-bw/serial-number-icon-19.png",
+    src: three,
   },
   {
     name: "Fourth",
-    src: "http://getdrawings.com/free-icon-bw/serial-number-icon-18.png",
+    src: four,
   },
   {
     name: "Fifth",
-    src: "http://getdrawings.com/free-icon-bw/number-one-icon-17.png",
+    src: five,
   },
 ];
 
@@ -100,6 +104,7 @@ const Home = () => {
 
   console.log(count);
   const resetData = () => {
+    setDataDisplay(false);
     localStorage.setItem(
       "auth",
       JSON.stringify({ status: true, imgNum: count, name: localData?.name })
