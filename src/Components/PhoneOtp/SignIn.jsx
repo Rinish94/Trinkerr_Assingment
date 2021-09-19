@@ -112,8 +112,8 @@ const SignIn = () => {
   // console.log(login)
   return (
     <div className="wrapper">
-      <h1>Sign in</h1>
-      <p>Sign in using your mobile number.</p>
+      <h1>Sign Up</h1>
+      <p>Sign Up using your mobile number.</p>
       {!viewOtpForm ? (
         <div className="form-wrapper">
           <form id="loginForm" onSubmit={loginSubmit}>
@@ -139,7 +139,7 @@ const SignIn = () => {
             </div>
             <p></p>
             <button className="main-button" type="submit" id="sign-in-button">
-              Sign in
+              Sign Up
             </button>
           </form>
           {loading && <h2>Please Wait</h2>}

@@ -3,6 +3,7 @@ import firebase from "firebase/app";
 import "firebase/auth";
 import { useHistory } from "react-router";
 
+import "./Home.css";
 const imagesPool = [
   {
     name: "First",
@@ -28,7 +29,8 @@ const imagesPool = [
 
 const Home = () => {
   const localData = JSON.parse(localStorage.getItem("auth")) || undefined;
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(localData?.imgNum || 0);
+  const [dataDisplay, setDataDisplay] = useState(false);
   const history = useHistory();
   const firebaseConfig = {
     apiKey: "AIzaSyCUdDvqomv-YwURzNRMkObIaV9uxwoel4I",
@@ -50,11 +52,10 @@ const Home = () => {
       .auth()
       .signOut()
       .then(() => {
-        localStorage.setItem("auth", JSON.stringify({ status: false }));
-        history.push("/", "_self");
+        localStorage.clear();
+        window.open("/", "_self");
       })
       .catch((error) => {
-        // An error happened.
         console.log(error);
       });
   };
@@ -72,6 +73,7 @@ const Home = () => {
     );
   };
   (!localData?.status || localData === undefined) && history.push("/"); //
+
   useEffect(() => {
     localStorage.setItem(
       "auth",
@@ -87,6 +89,7 @@ const Home = () => {
     if (count >= imagesPool.length - 1) {
       // setCount(4);
       clearInterval(timer);
+      dataDisp();
     }
 
     console.log("object");
@@ -97,31 +100,43 @@ const Home = () => {
 
   console.log(count);
   const resetData = () => {
-    localStorage.clear();
+    localStorage.setItem(
+      "auth",
+      JSON.stringify({ status: true, imgNum: count, name: localData?.name })
+    );
     setCount(0);
   };
+  const dataDisp = () => {
+    setTimeout(() => {
+      setDataDisplay(true);
+    }, 5000);
+  };
   return (
-    <div className="wrapper">
-      <h1 className="main-heading">Welcome 👋, {localData?.name}</h1>
-      <button className="main-button" id="signOut" onClick={signOut}>
+    <div className="wrapper2">
+      <button className="SignOut-button" id="signOut" onClick={signOut}>
         Sign Out
       </button>
-      <div>
-        <img
-          width="50px"
-          height="50px"
-          src={imagesPool[count].src}
-          alt="images"
-        />
-        <div>
-          <button onClick={imageBackward}>{"<"}</button>
-          <button onClick={imageForward}>{">"}</button>
-          <button onClick={resetData}>Reset</button>
+      <h1 className="main-heading">Welcome {localData?.name} 👋</h1>
+      <div className="dataContainer">
+        <div className="dataCont2">
+          <div className="imgDiv">
+          <img
+            width="250px"
+            height="250px"
+            src={imagesPool[count].src}
+            alt="images"
+          />
+          </div>
+          <div className="imgButton">
+            <button onClick={imageBackward}>{"<"}</button>
+            <button onClick={resetData}>Reset</button>
+            <button onClick={imageForward}>{">"}</button>
+          </div>
         </div>
-        {count === 4 && (
+        {dataDisplay && (
           <p>
             {" "}
-            {`${localData?.name}, you have rated all the images. Thank You!`}
+            {`${localData?.name} you have rated all the images. Thank You!`}
           </p>
         )}
       </div>
