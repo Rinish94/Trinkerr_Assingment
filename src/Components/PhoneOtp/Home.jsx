@@ -84,7 +84,7 @@ const Home = () => {
     } else {
       var timer = setInterval(() => {
         setCount(count + 1);
-      }, 2000);
+      }, 4000);
     }
     if (count >= imagesPool.length - 1) {
       // setCount(4);
@@ -120,12 +120,12 @@ const Home = () => {
       <div className="dataContainer">
         <div className="dataCont2">
           <div className="imgDiv">
-          <img
-            width="250px"
-            height="250px"
-            src={imagesPool[count].src}
-            alt="images"
-          />
+            <img
+              width="250px"
+              height="250px"
+              src={imagesPool[count].src}
+              alt="images"
+            />
           </div>
           <div className="imgButton">
             <button onClick={imageBackward}>{"<"}</button>
